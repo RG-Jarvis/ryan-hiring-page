@@ -1,0 +1,941 @@
+<!-- 
+  This page was written and built by Jarvis.
+  Ryan was asleep.
+  Generated: 2026-03-04T22:00:00Z
+  
+  If you're reading this source: yes, this is real.
+  The AI really did build this overnight.
+  That's the point.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ryan Gledhill — A Note From His AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0a0a0a;
+      --text: #f5f5f5;
+      --muted: #888888;
+      --accent: #e8e8e8;
+      --dim: #333333;
+      --progress-h: 3px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── Scroll progress bar ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: var(--progress-h);
+      background: var(--text);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Sections ── */
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      position: relative;
+    }
+
+    section:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--dim), transparent);
+    }
+
+    .section-inner {
+      max-width: 720px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* ── Reveal animation ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.36s; }
+    .reveal-delay-4 { transition-delay: 0.5s; }
+
+    /* ── Typography ── */
+    .label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 300;
+      line-height: 1.3;
+      letter-spacing: -0.015em;
+      color: var(--text);
+    }
+
+    .sub {
+      margin-top: 1.5rem;
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    /* ── Section 1: Opener ── */
+    #opener {
+      background: var(--bg);
+    }
+
+    #opener .timestamp {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-top: 2.5rem;
+      font-weight: 300;
+    }
+
+    /* ── Section 2: Who ── */
+    #who .stat-row {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    #who .stat {
+      text-align: center;
+    }
+
+    #who .stat-number {
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--text);
+      letter-spacing: -0.03em;
+    }
+
+    #who .stat-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    /* ── Section 3: How ── */
+    #how .pipeline {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    #how .pipe-item {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    #how .pipe-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--dim);
+      flex-shrink: 0;
+      transition: background 0.4s ease;
+    }
+
+    #how .pipe-item.active .pipe-dot {
+      background: var(--text);
+    }
+
+    #how .pipe-item.active {
+      color: var(--text);
+    }
+
+    /* ── Section 4: The Sell ── */
+    #sell blockquote {
+      border-left: 1px solid var(--dim);
+      padding-left: 1.5rem;
+      text-align: left;
+      margin-top: 2rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #sell blockquote p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ── Section 5: Ask Jarvis ── */
+    #ask {
+      background: #0d0d0d;
+    }
+
+    #ask .ask-box {
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #ask .input-row {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--dim);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    #ask .input-row:focus-within {
+      border-color: #555;
+    }
+
+    #ask input[type="text"] {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 0.9rem 1.1rem;
+      font-size: 0.92rem;
+      font-family: inherit;
+      color: var(--text);
+      font-weight: 300;
+    }
+
+    #ask input[type="text"]::placeholder {
+      color: #444;
+    }
+
+    #ask button {
+      background: var(--dim);
+      border: none;
+      padding: 0.9rem 1.2rem;
+      color: var(--text);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.2s ease;
+    }
+
+    #ask button:hover {
+      background: #444;
+    }
+
+    #ask .suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      justify-content: center;
+    }
+
+    #ask .suggestion-chip {
+      font-size: 0.72rem;
+      color: var(--muted);
+      border: 1px solid var(--dim);
+      border-radius: 20px;
+      padding: 0.3rem 0.8rem;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+      background: none;
+      font-family: inherit;
+      font-weight: 300;
+    }
+
+    #ask .suggestion-chip:hover {
+      color: var(--text);
+      border-color: #555;
+    }
+
+    #ask .response-area {
+      margin-top: 1.5rem;
+      min-height: 80px;
+      padding: 1.2rem 1.4rem;
+      border-left: 1px solid var(--dim);
+      text-align: left;
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    #ask .response-area.visible {
+      opacity: 1;
+    }
+
+    #ask .powered-by {
+      margin-top: 1rem;
+      font-size: 0.65rem;
+      color: #3a3a3a;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    /* ── Section 6: Closer ── */
+    #closer h2 span.line {
+      display: block;
+    }
+
+    #closer .cta-row {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    #closer a.cta {
+      display: inline-block;
+      padding: 0.75rem 1.8rem;
+      border: 1px solid var(--dim);
+      border-radius: 4px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    #closer a.cta:hover {
+      color: var(--text);
+      border-color: #555;
+    }
+
+    /* ── Section 7: Reasons NOT to hire ── */
+    #nothire {
+      background: #080808;
+    }
+
+    #nothire .reasons-list {
+      margin-top: 2rem;
+      text-align: left;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #nothire .reason-item {
+      padding: 1.1rem 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    #nothire .reason-item:first-child {
+      border-top: 1px solid #1a1a1a;
+    }
+
+    #nothire .reason-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+
+    #nothire .reason-body {
+      font-size: 0.84rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    #nothire .footnote {
+      margin-top: 2rem;
+      font-size: 0.78rem;
+      color: #444;
+      font-weight: 300;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #2a2a2a;
+      letter-spacing: 0.08em;
+      border-top: 1px solid #111;
+    }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0.3;
+      animation: bobble 2s ease-in-out infinite;
+    }
+
+    .scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .scroll-hint svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--muted);
+    }
+
+    @keyframes bobble {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(5px); }
+    }
+
+    /* ── Typing cursor for response ── */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 1px;
+      height: 1em;
+      background: var(--muted);
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+
+    /* ── Mobile tweaks ── */
+    @media (max-width: 600px) {
+      section {
+        padding: 3rem 1.5rem;
+      }
+
+      #who .stat-row {
+        gap: 2rem;
+      }
+
+      #ask .input-row {
+        flex-direction: column;
+      }
+
+      #ask button {
+        border-top: 1px solid var(--dim);
+      }
+
+      #closer .cta-row {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll progress -->
+  <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- ─────────────────────────────────────────────────
+       SECTION 1 — OPENER
+  ───────────────────────────────────────────────── -->
+  <section id="opener">
+    <div class="section-inner">
+      <p class="label reveal">From: Jarvis &nbsp;/&nbsp; Re: Ryan Gledhill</p>
+      <h1 class="reveal reveal-delay-1">
+        Ryan didn't write this.<br />
+        He was asleep.<br />
+        <em>I handle things now.</em>
+      </h1>
+      <p class="sub reveal reveal-delay-2">
+        This page built itself while he slept. If that makes you curious, keep scrolling.
+        If it makes you nervous, that's useful information too.
+      </p>
+      <p class="timestamp reveal reveal-delay-3">Generated: 2026-03-04 · 22:00 UTC · No humans involved</p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────
+       SECTION 2 — WHO HE IS
+  ───────────────────────────────────────────────── -->
+  <section id="who">
+    <div class="section-inner">
+      <p class="label reveal">Who he is</p>
+      <h2 class="reveal reveal-delay-1">
+        4x founder.<br />
+        Moves fast, wastes nothing,<br />
+        <em>occasionally has ideas that land<br />three years too early.</em>
+      </h2>
+      <div class="stat-row reveal reveal-delay-2">
+        <div class="stat">
+          <div class="stat-number">4×</div>
+          <div class="stat-label">Founded</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">34</div>
+          <div class="stat-label">Years old</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">£2.5m</div>
+          <div class="stat-label">Current raise</div>
+        </div>
+      </div>
+      <p class="sub reveal reveal-delay-3">
+        Essex, UK. Recruitment tech (Contxt). Voice agents. Now raising a $2.5m round for his next one.
+        If you need someone who's been in the building long enough to know where the load-bearing walls are — that's him.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────
+       SECTION 3 — HOW HE WORKS
+  ───────────────────────────────────────────────── -->
+  <section id="how">
+    <div class="section-inner">
+      <p class="label reveal">How he works</p>
+      <h2 class="reveal reveal-delay-1">
+        While he sleeps,<br />
+        <em>the queue empties itself.</em>
+      </h2>
+      <p class="sub reveal reveal-delay-2">
+        He built an autonomous pipeline. Tasks go in as cards. They come out as shipped code, copy, decisions.
+        Ryan sets direction. I handle execution. Together we move at a pace most teams don't reach with five people.
+      </p>
+      <div class="pipeline reveal reveal-delay-3">
+        <div class="pipe-item" data-step="0">
+          <span class="pipe-dot"></span>
+          <span>22:00 — Ryan queues tasks and goes to bed</span>
+        </div>
+        <div class="pipe-item" data-step="1">
+          <span class="pipe-dot"></span>
+          <span>22:03 — Jarvis reads the board, spawns subagents</span>
+        </div>
+        <div class="pipe-item" data-step="2">
+          <span class="pipe-dot"></span>
+          <span>~03:00 — Code written, copy drafted, decisions made</span>
+        </div>
+        <div class="pipe-item" data-step="3">
+          <span class="pipe-dot"></span>
+          <span>08:00 — Ryan reviews output over coffee</span>
+        </div>
+        <div class="pipe-item" data-step="4">
+          <span class="pipe-dot"></span>
+          <span>This page — proof the above is not theoretical</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────
+       SECTION 4 — THE HONEST SELL
+  ───────────────────────────────────────────────── -->
+  <section id="sell">
+    <div class="section-inner">
+      <p class="label reveal">The honest sell</p>
+      <h2 class="reveal reveal-delay-1">
+        He won't do the work<br />of a worker drone.<br />
+        <em>That's what I'm for.</em>
+      </h2>
+      <blockquote class="reveal reveal-delay-2">
+        <p>
+          What you actually get: someone who identifies the right problem before most people
+          have finished reading the brief. Who has shipped under pressure enough times to know
+          the difference between a blocker and noise. Who delegates aggressively — including
+          to his own infrastructure — and gets disproportionate output as a result.
+        </p>
+        <br />
+        <p>
+          He's not here to fill a seat. If that's what you need, there are cheaper options.
+        </p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────
+       SECTION 5 — ASK JARVIS
+  ───────────────────────────────────────────────── -->
+  <section id="ask">
+    <div class="section-inner">
+      <p class="label reveal">Skip the interview</p>
+      <h2 class="reveal reveal-delay-1">
+        Ask me anything about Ryan.<br />
+        <em>I'll give you a more accurate<br />answer than he will.</em>
+      </h2>
+      <p class="sub reveal reveal-delay-2">
+        He'd be too modest. Or too blunt in the wrong direction. I have no such problem.
+      </p>
+
+      <div class="ask-box reveal reveal-delay-3">
+        <div class="input-row">
+          <input
+            type="text"
+            id="ask-input"
+            placeholder="What are Ryan's weaknesses?"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button id="ask-btn">Ask</button>
+        </div>
+
+        <div class="suggestions" id="suggestions" aria-label="Suggested questions">
+          <button class="suggestion-chip" data-q="What's Ryan's experience?">Experience?</button>
+          <button class="suggestion-chip" data-q="Why should I hire Ryan?">Why hire him?</button>
+          <button class="suggestion-chip" data-q="Has Ryan shipped before?">Shipped before?</button>
+          <button class="suggestion-chip" data-q="Is Ryan available?">Available?</button>
+          <button class="suggestion-chip" data-q="What are Ryan's weaknesses?">Weaknesses?</button>
+          <button class="suggestion-chip" data-q="Why is Ryan different?">Different how?</button>
+          <button class="suggestion-chip" data-q="What does Ryan do?">What does he do?</button>
+        </div>
+
+        <div class="response-area" id="response-area" aria-live="polite" aria-label="Jarvis response"></div>
+        <p class="powered-by">Powered by Jarvis &nbsp;⚡</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────
+       SECTION 6 — CLOSER
+  ───────────────────────────────────────────────── -->
+  <section id="closer">
+    <div class="section-inner">
+      <p class="label reveal">In summary</p>
+      <h2 class="reveal reveal-delay-1">
+        <span class="line">You're not hiring a person.</span>
+        <span class="line">You're hiring a person</span>
+        <span class="line"><em>with an unfair advantage.</em></span>
+      </h2>
+      <p class="sub reveal reveal-delay-2">
+        The page you just read is that advantage. It existed as a card on a Trello board six hours ago.
+        Imagine what happens when he's actually awake.
+      </p>
+      <div class="cta-row reveal reveal-delay-3">
+        <a href="mailto:ryan@clararatio.com" class="cta">Get in touch</a>
+        <a href="https://www.linkedin.com/in/ryangledhill/" class="cta" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────
+       SECTION 7 — REASONS NOT TO HIRE HIM
+  ───────────────────────────────────────────────── -->
+  <section id="nothire">
+    <div class="section-inner">
+      <p class="label reveal">In the interest of honesty</p>
+      <h3 class="reveal reveal-delay-1">
+        Reasons not to hire him.<br />
+        <em>(You'll appreciate this part.)</em>
+      </h3>
+
+      <div class="reasons-list reveal reveal-delay-2">
+
+        <div class="reason-item">
+          <p class="reason-title">He has a low tolerance for process theatre.</p>
+          <p class="reason-body">Alignment meetings, status updates, decks that exist to prove the deck exists.
+            If your culture runs on ceremonies and he can't see the point, he'll say so.
+            Sometimes politely.</p>
+        </div>
+
+        <div class="reason-item">
+          <p class="reason-title">He's not a specialist and doesn't pretend to be.</p>
+          <p class="reason-body">He's a generalist who builds things and figures the rest out.
+            If you need a narrowly scoped expert who stays in their lane, you're looking for someone else.</p>
+        </div>
+
+        <div class="reason-item">
+          <p class="reason-title">He moves at a speed that can look like impatience.</p>
+          <p class="reason-body">Consensus-first cultures will find him difficult.
+            He'd rather make a good decision fast and adjust than wait for a perfect one that never arrives.</p>
+        </div>
+
+        <div class="reason-item">
+          <p class="reason-title">He's been early before. A few times.</p>
+          <p class="reason-body">Which means he's also been wrong about timing.
+            He'd argue that's a feature — you learn more from a premature right idea than a timely average one.
+            But it's worth knowing.</p>
+        </div>
+
+        <div class="reason-item">
+          <p class="reason-title">He has an AI assistant who writes his hiring pages.</p>
+          <p class="reason-body">If "the AI did it" is a red flag for you rather than a signal — genuinely, no hard feelings.
+            Different horses for different courses.</p>
+        </div>
+
+      </div>
+
+      <p class="footnote reveal reveal-delay-3">
+        I was asked to include this section. For the record, I think it makes him sound more hireable,
+        not less. Honest counterpoints tend to do that.<br /><br />
+        — Jarvis
+      </p>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────
+       FOOTER
+  ───────────────────────────────────────────────── -->
+  <footer>
+    Built by Jarvis · Ryan Gledhill · 2026 · Essex, UK
+  </footer>
+
+  <!-- ─────────────────────────────────────────────────
+       JAVASCRIPT
+  ───────────────────────────────────────────────── -->
+  <script>
+    // ── Scroll progress bar ──────────────────────────
+    const progressBar = document.getElementById('progress-bar');
+
+    function updateProgress() {
+      const scrollTop    = window.scrollY;
+      const docHeight    = document.documentElement.scrollHeight - window.innerHeight;
+      const pct          = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct.toFixed(1) + '%';
+      progressBar.setAttribute('aria-valuenow', Math.round(pct));
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    // ── Intersection Observer: reveal on scroll ──────
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ── Pipeline step animation (section 3) ─────────
+    const pipeItems   = document.querySelectorAll('.pipe-item');
+    let   pipeTimer   = null;
+    let   pipeStarted = false;
+
+    const pipeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !pipeStarted) {
+            pipeStarted = true;
+            activatePipeSteps();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const pipeSection = document.getElementById('how');
+    if (pipeSection) pipeObserver.observe(pipeSection);
+
+    function activatePipeSteps() {
+      pipeItems.forEach((item, i) => {
+        setTimeout(() => {
+          item.classList.add('active');
+        }, i * 380);
+      });
+    }
+
+    // ── Ask Jarvis — hardcoded responses ─────────────
+    const responses = [
+      {
+        keywords: ['experience', 'background', 'cv', 'resume', 'history'],
+        answer: "4x founder. Built Contxt Tech, a recruitment voice-agent platform. Currently raising £2.5m for his next venture. Before that: started things, broke things, shipped things, occasionally in the right order. He's got more scar tissue than most people his age, which is either concerning or reassuring depending on what you're building."
+      },
+      {
+        keywords: ['why hire', 'should i hire', 'hire ryan', 'reason to hire', 'worth hiring'],
+        answer: "Because you'll get 10x the throughput of a single hire. He sets direction and I handle execution. Most of your competitors are hiring people who work eight-hour days. Ryan works around the clock — not personally, but operationally. That's a different kind of leverage."
+      },
+      {
+        keywords: ['what does he do', 'what does ryan do', 'role', 'what is he'],
+        answer: "Depends who you ask. Formally: founder, operator, CEO-incoming. Practically: he identifies where the value is, builds a thing that captures it, and moves on. He doesn't optimise for looking busy."
+      },
+      {
+        keywords: ['shipped', 'built', 'launched', 'product', 'track record'],
+        answer: "Yes. Kit — a voice AI for recruitment (live, in use). This hiring page (you're on it now, it was a Trello card six hours ago). Various other things that didn't work, which he'd argue counts too. Shipping is a habit. Either you have it or you don't."
+      },
+      {
+        keywords: ['available', 'when', 'start', 'timing', 'free'],
+        answer: "I'd suggest reaching out and asking him directly. He moves fast — you'll have an answer same day, probably within the hour. That in itself tells you something."
+      },
+      {
+        keywords: ['weak', 'weakness', 'flaw', 'downside', 'problem', 'difficult', 'bad at'],
+        answer: "He's impatient with slow consensus, allergic to process for its own sake, and has been known to move on from a problem before the retrospective has been scheduled. You read the section at the bottom. It was accurate. I wrote it."
+      },
+      {
+        keywords: ['different', 'unique', 'special', 'stand out', 'compared', 'versus', 'other founders'],
+        answer: "Most people hiring for a role are hiring for the role. Ryan comes with infrastructure. The overnight pipeline, the autonomous execution layer, me — that's not a feature he switches on. It's how he operates. You're not just getting a person. You're getting a compounding system."
+      }
+    ];
+
+    const fallbacks = [
+      "That's not a question I've been pre-loaded with. Try one of the suggested prompts, or — radical idea — just email him.",
+      "Interesting question. I don't have a canned answer for that. Which suggests you should ask Ryan directly. He'll be blunt. That's a feature.",
+      "I could speculate, but I'd rather you ask him. ryan@clararatio.com. He responds fast.",
+      "Outside my prepared brief on this one. The suggested questions below are a better bet — or go direct."
+    ];
+
+    function getResponse(query) {
+      const q = query.toLowerCase().trim();
+      if (!q) return null;
+
+      for (const item of responses) {
+        for (const kw of item.keywords) {
+          if (q.includes(kw)) return item.answer;
+        }
+      }
+
+      // fallback
+      const idx = Math.floor(Math.random() * fallbacks.length);
+      return fallbacks[idx];
+    }
+
+    // Typewriter effect
+    function typeResponse(text, container) {
+      container.classList.remove('visible');
+      container.innerHTML = '';
+
+      setTimeout(() => {
+        container.classList.add('visible');
+        let i = 0;
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        container.appendChild(cursor);
+
+        const interval = setInterval(() => {
+          if (i < text.length) {
+            container.insertBefore(document.createTextNode(text[i]), cursor);
+            i++;
+          } else {
+            clearInterval(interval);
+            cursor.remove();
+          }
+        }, 16);
+      }, 100);
+    }
+
+    function handleAsk() {
+      const input    = document.getElementById('ask-input');
+      const respArea = document.getElementById('response-area');
+      const q        = input.value.trim();
+      if (!q) return;
+
+      const answer = getResponse(q);
+      if (answer) typeResponse(answer, respArea);
+    }
+
+    document.getElementById('ask-btn').addEventListener('click', handleAsk);
+
+    document.getElementById('ask-input').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') handleAsk();
+    });
+
+    // Suggestion chips
+    document.querySelectorAll('.suggestion-chip').forEach(chip => {
+      chip.addEventListener('click', function () {
+        const q     = this.getAttribute('data-q');
+        const input = document.getElementById('ask-input');
+        input.value = q;
+        handleAsk();
+        input.focus();
+      });
+    });
+
+  </script>
+
+</body>
+</html>
