@@ -82,7 +82,7 @@
     em { font-style: normal; color: var(--orange); }
 
     /* ── OPENER ── */
-    #opener { background: var(--bg); }
+    #opener { }
     #opener .timestamp { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; margin-top: 2.5rem; font-weight: 300; }
 
     /* ── WHO ── */
@@ -110,7 +110,7 @@
     #how .tl-item.active .tl-text { color: var(--text); }
 
     /* ── PROOF PILLS — flip cards ── */
-    #proof { background: #070707; }
+    #proof { }
     #proof .pills-lead {
       font-size: clamp(0.95rem, 2.2vw, 1.15rem); font-weight: 300; color: var(--muted);
       margin-top: 1.5rem; margin-bottom: 2rem;
@@ -184,7 +184,7 @@
     #sell blockquote p { font-size: 0.95rem; font-weight: 300; color: var(--muted); line-height: 1.8; }
 
     /* ── TEAM ── */
-    #team { background: #080808; }
+    #team { }
     #team .team-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem 2rem; margin-top: 2.5rem;
     }
@@ -210,14 +210,8 @@
     /* ── ASK JARVIS — removed, replaced by ElevenLabs widget ── */
 
     /* ── JARVIS WIDGET ── */
-    #voice { background: #090909; }
-    #voice .widget-wrap {
-      margin-top: 2rem; max-width: 640px; margin-left: auto; margin-right: auto;
-      display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
-      position: relative; z-index: 9999;
-    }
-    /* ElevenLabs renders its own shadow DOM — ensure it stacks above everything */
-    elevenlabs-convai { display: block; width: 100%; position: relative; z-index: 9999; }
+    #voice { }
+    /* ElevenLabs widget manages its own floating position — no wrapper needed */
 
     /* ── CLOSER ── */
     #closer h2 span.line { display: block; }
@@ -231,7 +225,7 @@
     #closer a.cta:hover { color: var(--text); border-color: #555; }
 
     /* ── NOT HIRE ── */
-    #nothire { background: #080808; }
+    #nothire { }
     #nothire .reasons-list { margin-top: 2rem; text-align: left; max-width: 520px; margin-left: auto; margin-right: auto; }
     #nothire .reason-item { padding: 1.1rem 0; border-bottom: 1px solid #1a1a1a; }
     #nothire .reason-item:first-child { border-top: 1px solid #1a1a1a; }
@@ -661,12 +655,7 @@
       Ryan's too modest to say this stuff himself. I'm not.
     </p>
 
-    <div class="widget-wrap">
-      <elevenlabs-convai
-        agent-id="agent_4501kjz1wyxyfx3rac5hjn1k37w3"
-        style="display:block;width:100%;min-height:80px;"
-      ></elevenlabs-convai>
-    </div>
+    <!-- ElevenLabs widget moved to floating position — see bottom of body -->
 
     <!-- Post-call CTA — shown after conversation ends via window.showPostCallCard() -->
     <div id="post-call-card">
@@ -931,7 +920,8 @@
   })();
 </script>
 
-<!-- ElevenLabs ConvAI widget -->
+<!-- ElevenLabs ConvAI widget — floating bottom-right, widget manages its own positioning -->
+<elevenlabs-convai agent-id="agent_4501kjz1wyxyfx3rac5hjn1k37w3"></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
 
 </body>
