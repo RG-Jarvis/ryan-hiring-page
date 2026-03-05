@@ -19,7 +19,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #0a0a0a; --text: #f5f5f5; --muted: #888888;
+      --bg: #0a0a0a; --text: #f5f5f5; --muted: #919191;
       --accent: #e8e8e8; --dim: #333333; --progress-h: 3px;
       --orange: #ff6b2b;
     }
@@ -28,6 +28,16 @@
       background-color: var(--bg); color: var(--text);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       overflow-x: hidden;
+    }
+
+    /* ── PARALLAX BG CANVAS ── */
+    #bg-canvas {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0; pointer-events: none; opacity: 1;
+    }
+    /* Ensure all content sits above the bg */
+    #progress-bar, section, footer, #sticky-bar, #post-call-card {
+      position: relative; z-index: 1;
     }
 
     /* Progress */
@@ -92,7 +102,7 @@
     }
     #how .tl-item:first-child { border-top: 1px solid #151515; }
     #how .tl-time {
-      font-size: 0.68rem; font-weight: 500; color: #666; padding-top: 0.2rem;
+      font-size: 0.68rem; font-weight: 500; color: #919191; padding-top: 0.2rem;
       letter-spacing: 0.06em; text-align: right; transition: color 0.4s ease;
     }
     #how .tl-text { font-size: 0.88rem; font-weight: 300; color: #aaa; line-height: 1.55; transition: color 0.4s ease; }
@@ -140,11 +150,11 @@
       font-size: 0.88rem; font-weight: 400; color: var(--text); line-height: 1.5;
       flex: 1;
     }
-    #proof .pill-q::before { content: '"'; color: #555; }
-    #proof .pill-q::after  { content: '"'; color: #555; }
+    #proof .pill-q::before { content: '"'; color: #919191; }
+    #proof .pill-q::after  { content: '"'; color: #919191; }
     #proof .pill-hint {
       margin-top: 1rem; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: #555; font-weight: 400;
+      color: #919191; font-weight: 400;
     }
     /* Back face — rotated 180° in Y */
     #proof .pill-back {
@@ -158,13 +168,13 @@
     }
     #proof .pill-back-close {
       margin-top: 1rem; font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: #555; font-weight: 400;
+      color: #919191; font-weight: 400;
     }
     #proof .proof-cta {
-      margin-top: 2rem; font-size: 0.78rem; color: #777; text-align: center;
+      margin-top: 2rem; font-size: 0.78rem; color: #919191; text-align: center;
       letter-spacing: 0.06em; font-weight: 300;
     }
-    #proof .proof-cta a { color: #888 !important; border-bottom-color: #555 !important; }
+    #proof .proof-cta a { color: #919191 !important; border-bottom-color: #666 !important; }
 
     /* ── SELL ── */
     #sell blockquote {
@@ -192,9 +202,9 @@
       font-size: 0.65rem; font-weight: 500; letter-spacing: 0.16em;
       text-transform: uppercase; color: var(--orange); margin-top: -0.3rem;
     }
-    #team .member-bio { font-size: 0.78rem; font-weight: 300; color: #888; line-height: 1.55; text-align: center; }
+    #team .member-bio { font-size: 0.78rem; font-weight: 300; color: #919191; line-height: 1.55; text-align: center; }
     #team .team-footnote {
-      margin-top: 2.5rem; font-size: 0.75rem; color: #666; font-style: italic; line-height: 1.65;
+      margin-top: 2.5rem; font-size: 0.75rem; color: #919191; font-style: italic; line-height: 1.65;
     }
 
     /* ── ASK JARVIS — removed, replaced by ElevenLabs widget ── */
@@ -227,7 +237,7 @@
     #nothire .reason-item:first-child { border-top: 1px solid #1a1a1a; }
     #nothire .reason-title { font-size: 0.88rem; font-weight: 500; color: var(--text); margin-bottom: 0.35rem; }
     #nothire .reason-body { font-size: 0.84rem; font-weight: 300; color: #999; line-height: 1.65; }
-    #nothire .footnote { margin-top: 2rem; font-size: 0.78rem; color: #777; font-weight: 300; text-align: center; line-height: 1.6; }
+    #nothire .footnote { margin-top: 2rem; font-size: 0.78rem; color: #919191; font-weight: 300; text-align: center; line-height: 1.6; }
 
     /* ── FOOTER ── */
     footer { padding: 2rem; text-align: center; font-size: 0.7rem; color: #2a2a2a; letter-spacing: 0.08em; border-top: 1px solid #111; }
@@ -244,7 +254,7 @@
     }
     #sticky-bar.visible { transform: translateY(0); pointer-events: auto; }
     #sticky-bar .bar-label {
-      font-size: 0.65rem; color: #777; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 0.65rem; color: #919191; letter-spacing: 0.12em; text-transform: uppercase;
       white-space: nowrap; flex-shrink: 0;
     }
     #sticky-bar .bar-links { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; }
@@ -256,7 +266,7 @@
     }
     #sticky-bar .bar-link:hover { color: var(--text); border-color: #444; }
     #sticky-bar .bar-dismiss {
-      background: none; border: none; color: #666; cursor: pointer;
+      background: none; border: none; color: #919191; cursor: pointer;
       font-size: 1rem; line-height: 1; padding: 0.2rem 0.4rem; margin-left: 0.4rem;
       transition: color 0.2s ease; flex-shrink: 0;
     }
@@ -316,6 +326,9 @@
   </style>
 </head>
 <body>
+
+<!-- Parallax fluid background -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
 
 <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
@@ -629,7 +642,7 @@
 
     <p class="team-footnote reveal reveal-delay-4">
       Plus 15 more specialists — coding pipeline, security, DevOps, testing. The full roster is available on request.<br />
-      <span style="color: #555; font-size: 0.7rem;">Portraits generated by Nano Banana · Steampunk edition</span>
+      <span style="color: #919191; font-size: 0.7rem;">Portraits generated by Nano Banana · Steampunk edition</span>
     </p>
   </div>
 </section>
@@ -856,6 +869,57 @@
   }
   // Expose globally for ElevenLabs widget callback
   window.showPostCallCard = showPostCallCard;
+
+  // ── Parallax fluid background ─────────────────────
+  (function () {
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, scrollY = 0, t = 0;
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+
+    // Blob config — large, slow, barely-visible against near-black
+    const blobs = [
+      { x: 0.15, y: 0.20, r: 0.55, sp: 0.00018, phase: 0.0,  col: [30, 15, 8]  },  // very dark amber
+      { x: 0.80, y: 0.60, r: 0.50, sp: 0.00013, phase: 2.1,  col: [8,  18, 28]  },  // very dark blue
+      { x: 0.50, y: 1.10, r: 0.65, sp: 0.00010, phase: 4.3,  col: [18, 10, 28]  },  // very dark purple
+      { x: 0.30, y: 1.70, r: 0.48, sp: 0.00016, phase: 1.5,  col: [28, 14, 6]   },  // dark ember
+      { x: 0.75, y: 2.20, r: 0.58, sp: 0.00012, phase: 3.7,  col: [6,  20, 22]  },  // dark teal
+    ];
+
+    function draw() {
+      t += 1;
+      ctx.clearRect(0, 0, W, H);
+
+      // Parallax offset: bg moves at 20% of scroll speed
+      const parallaxY = scrollY * 0.2;
+
+      for (const b of blobs) {
+        // Organic drift using sin/cos
+        const cx = (b.x + Math.sin(t * b.sp + b.phase) * 0.12) * W;
+        const cy = (b.y + Math.cos(t * b.sp * 0.7 + b.phase) * 0.08) * H * 3 - parallaxY;
+        const radius = b.r * Math.max(W, H);
+
+        const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+        grad.addColorStop(0, `rgba(${b.col[0]}, ${b.col[1]}, ${b.col[2]}, 0.55)`);
+        grad.addColorStop(1, `rgba(${b.col[0]}, ${b.col[1]}, ${b.col[2]}, 0)`);
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
 </script>
 
 </body>
