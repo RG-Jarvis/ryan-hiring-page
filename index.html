@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -658,7 +658,7 @@
       <em>Type or talk — I'll answer.</em>
     </h2>
     <p class="sub reveal reveal-delay-2">
-      He'd be too modest. Or too blunt in the wrong direction. I have no such problem.
+      Ryan's too modest to say this stuff himself. I'm not.
     </p>
 
     <div class="widget-wrap reveal reveal-delay-3">
@@ -884,30 +884,39 @@
     window.addEventListener('resize', resize);
     window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
 
-    // Blob config — large, slow, barely-visible against near-black
+    // Blobs — positions are in viewport units (0–1 on x, anchored to scroll position).
+    // Each blob has a "home" scroll fraction (scrollAnchor: 0–1 across total page).
+    // At rest, each blob sits near the viewport centre when you're at its scroll position.
     const blobs = [
-      { x: 0.15, y: 0.20, r: 0.55, sp: 0.00018, phase: 0.0,  col: [30, 15, 8]  },  // very dark amber
-      { x: 0.80, y: 0.60, r: 0.50, sp: 0.00013, phase: 2.1,  col: [8,  18, 28]  },  // very dark blue
-      { x: 0.50, y: 1.10, r: 0.65, sp: 0.00010, phase: 4.3,  col: [18, 10, 28]  },  // very dark purple
-      { x: 0.30, y: 1.70, r: 0.48, sp: 0.00016, phase: 1.5,  col: [28, 14, 6]   },  // dark ember
-      { x: 0.75, y: 2.20, r: 0.58, sp: 0.00012, phase: 3.7,  col: [6,  20, 22]  },  // dark teal
+      { x: 0.20, scrollAnchor: 0.05, r: 0.60, sp: 0.00018, phase: 0.0, col: [30, 15, 8]  },  // dark amber — top
+      { x: 0.78, scrollAnchor: 0.25, r: 0.52, sp: 0.00013, phase: 2.1, col: [8,  18, 28]  },  // dark blue
+      { x: 0.45, scrollAnchor: 0.45, r: 0.68, sp: 0.00010, phase: 4.3, col: [18, 10, 28]  },  // dark purple — mid
+      { x: 0.25, scrollAnchor: 0.65, r: 0.50, sp: 0.00016, phase: 1.5, col: [28, 14, 6]   },  // dark ember
+      { x: 0.72, scrollAnchor: 0.85, r: 0.60, sp: 0.00012, phase: 3.7, col: [6,  20, 22]  },  // dark teal — bottom
     ];
 
     function draw() {
       t += 1;
       ctx.clearRect(0, 0, W, H);
 
-      // Parallax offset: bg moves at 20% of scroll speed
-      const parallaxY = scrollY * 0.2;
+      const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+      const maxScroll = docH - H;
 
       for (const b of blobs) {
-        // Organic drift using sin/cos
-        const cx = (b.x + Math.sin(t * b.sp + b.phase) * 0.12) * W;
-        const cy = (b.y + Math.cos(t * b.sp * 0.7 + b.phase) * 0.08) * H * 3 - parallaxY;
+        // Organic horizontal drift
+        const cx = (b.x + Math.sin(t * b.sp + b.phase) * 0.10) * W;
+
+        // Blob's absolute Y in document coords
+        const blobDocY = b.scrollAnchor * docH
+                       + Math.cos(t * b.sp * 0.7 + b.phase) * H * 0.08;
+
+        // Parallax: bg moves at 30% of scroll speed → offset by 0.7 * scrollY from document pos
+        const cy = blobDocY - scrollY * 0.7;
+
         const radius = b.r * Math.max(W, H);
 
         const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-        grad.addColorStop(0, `rgba(${b.col[0]}, ${b.col[1]}, ${b.col[2]}, 0.55)`);
+        grad.addColorStop(0, `rgba(${b.col[0]}, ${b.col[1]}, ${b.col[2]}, 0.60)`);
         grad.addColorStop(1, `rgba(${b.col[0]}, ${b.col[1]}, ${b.col[2]}, 0)`);
 
         ctx.beginPath();
