@@ -236,6 +236,60 @@
     /* ── FOOTER ── */
     footer { padding: 2rem; text-align: center; font-size: 0.7rem; color: #2a2a2a; letter-spacing: 0.08em; border-top: 1px solid #111; }
 
+    /* ── STICKY CONTACT BAR ── */
+    #sticky-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+      background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
+      border-top: 1px solid #1a1a1a;
+      display: flex; align-items: center; justify-content: center; gap: 1.2rem;
+      padding: 0.75rem 1.5rem;
+      transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      pointer-events: none;
+    }
+    #sticky-bar.visible { transform: translateY(0); pointer-events: auto; }
+    #sticky-bar .bar-label {
+      font-size: 0.65rem; color: #3a3a3a; letter-spacing: 0.12em; text-transform: uppercase;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    #sticky-bar .bar-links { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; }
+    #sticky-bar .bar-link {
+      font-size: 0.75rem; color: var(--muted); text-decoration: none;
+      border: 1px solid #222; border-radius: 3px; padding: 0.35rem 0.85rem;
+      font-weight: 400; letter-spacing: 0.05em; white-space: nowrap;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    #sticky-bar .bar-link:hover { color: var(--text); border-color: #444; }
+    #sticky-bar .bar-dismiss {
+      background: none; border: none; color: #2a2a2a; cursor: pointer;
+      font-size: 1rem; line-height: 1; padding: 0.2rem 0.4rem; margin-left: 0.4rem;
+      transition: color 0.2s ease; flex-shrink: 0;
+    }
+    #sticky-bar .bar-dismiss:hover { color: #555; }
+
+    /* ── POST-CALL CARD ── */
+    #post-call-card {
+      display: none; margin-top: 1.5rem; border: 1px solid #1e1e1e; border-radius: 8px;
+      padding: 1.4rem 1.6rem; max-width: 420px; margin-left: auto; margin-right: auto;
+      text-align: center; background: #070707;
+      animation: fadeSlideUp 0.5s ease forwards;
+    }
+    #post-call-card.visible { display: block; }
+    #post-call-card p {
+      font-size: 0.84rem; font-weight: 300; color: var(--muted); line-height: 1.6; margin-bottom: 1rem;
+    }
+    #post-call-card .card-links { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; }
+    #post-call-card .card-link {
+      font-size: 0.75rem; color: var(--muted); text-decoration: none;
+      border: 1px solid #222; border-radius: 3px; padding: 0.4rem 1rem;
+      font-weight: 400; letter-spacing: 0.05em;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    #post-call-card .card-link:hover { color: var(--text); border-color: #444; }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* ── SCROLL HINT ── */
     .scroll-hint {
       position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
@@ -610,6 +664,16 @@
       <p class="voice-note">Voice interface · Loading</p>
       <!-- WIDGET_PLACEHOLDER_END -->
     </div>
+
+    <!-- Post-call CTA — shown after voice conversation ends -->
+    <div id="post-call-card">
+      <p>If that was useful — Ryan reads everything himself.</p>
+      <div class="card-links">
+        <a class="card-link" href="mailto:ryan@codespec.co.uk">Email Ryan</a>
+        <a class="card-link" href="https://wa.me/447939664922" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="card-link" href="https://www.linkedin.com/in/ryan-gledhill/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -630,7 +694,8 @@
       his actual track record. Imagine what happens when he's pointed at your problem.
     </p>
     <div class="cta-row reveal reveal-delay-3">
-      <a href="mailto:ryan@codespec.co.uk" class="cta">Get in touch</a>
+      <a href="mailto:ryan@codespec.co.uk" class="cta">Email</a>
+      <a href="https://wa.me/447939664922" class="cta" target="_blank" rel="noopener">WhatsApp</a>
       <a href="https://www.linkedin.com/in/ryan-gledhill/" class="cta" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
@@ -702,6 +767,19 @@
 <footer>
   Built by Jarvis &nbsp;·&nbsp; Ryan Gledhill &nbsp;·&nbsp; 2026 &nbsp;·&nbsp; Essex, UK
 </footer>
+
+<!-- ══════════════════════════════════════════════════
+     STICKY CONTACT BAR
+═══════════════════════════════════════════════════ -->
+<div id="sticky-bar" role="complementary" aria-label="Contact Ryan">
+  <span class="bar-label">Get in touch</span>
+  <div class="bar-links">
+    <a class="bar-link" href="mailto:ryan@codespec.co.uk">Email</a>
+    <a class="bar-link" href="https://wa.me/447939664922" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="bar-link" href="https://www.linkedin.com/in/ryan-gledhill/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+  <button class="bar-dismiss" id="bar-dismiss" aria-label="Dismiss">×</button>
+</div>
 
 <!-- ══════════════════════════════════════════════════
      JAVASCRIPT
@@ -804,7 +882,7 @@
     },
     {
       keywords: ['contact', 'email', 'reach', 'get in touch', 'linkedin', 'message'],
-      answer: "Email: ryan@codespec.co.uk — he responds same day, usually within the hour. LinkedIn: linkedin.com/in/ryan-gledhill. That's it. No intake form, no scheduling link, just a reply."
+      answer: "Email: ryan@codespec.co.uk. WhatsApp: wa.me/447939664922. LinkedIn: linkedin.com/in/ryan-gledhill. No intake form, no scheduling link — just a reply, same day."
     }
   ];
 
@@ -856,6 +934,41 @@
       handleAsk();
     });
   });
+
+  // ── Sticky contact bar ────────────────────────────
+  const stickyBar = document.getElementById('sticky-bar');
+  const barDismiss = document.getElementById('bar-dismiss');
+  let barDismissed = false;
+  let barShown = false;
+
+  function checkStickyBar() {
+    if (barDismissed) return;
+    const scrollPct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    if (scrollPct > 30 && !barShown) {
+      barShown = true;
+      stickyBar.classList.add('visible');
+    } else if (scrollPct <= 30 && barShown && !barDismissed) {
+      barShown = false;
+      stickyBar.classList.remove('visible');
+    }
+  }
+
+  window.addEventListener('scroll', checkStickyBar, { passive: true });
+  barDismiss.addEventListener('click', () => {
+    barDismissed = true;
+    stickyBar.classList.remove('visible');
+  });
+
+  // ── Post-call card ────────────────────────────────
+  // Called by ElevenLabs widget when conversation ends.
+  // Wire up: widget.on('conversationEnd', showPostCallCard)
+  function showPostCallCard() {
+    const card = document.getElementById('post-call-card');
+    card.classList.add('visible');
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  // Expose globally for ElevenLabs widget callback
+  window.showPostCallCard = showPostCallCard;
 </script>
 
 </body>
