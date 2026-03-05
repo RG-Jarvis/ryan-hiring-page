@@ -587,16 +587,18 @@
 ═══════════════════════════════════════════════════ -->
 <section id="voice">
   <div class="section-inner">
-    <p class="label reveal">Coming soon</p>
+    <p class="label reveal">Or just talk to me</p>
     <h3 class="reveal reveal-delay-1">
       Rather hear it<br />
       <em>than read it?</em>
     </h3>
     <p class="sub reveal reveal-delay-2">
-      An ElevenLabs widget is being wired in. You'll be able to ask Jarvis questions by voice.
-      Because why would we make you type.
+      Ask me anything about Ryan. Same answers, no typing required.
     </p>
-    <div class="voice-wrap reveal reveal-delay-3">
+
+    <!-- ElevenLabs widget drops in here. Replace the placeholder block below. -->
+    <div class="voice-wrap reveal reveal-delay-3" id="elevenlabs-widget-container">
+      <!-- WIDGET_PLACEHOLDER_START -->
       <div class="voice-pulse">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
@@ -605,7 +607,8 @@
           <line x1="8" y1="23" x2="16" y2="23"/>
         </svg>
       </div>
-      <p class="voice-note">Voice interface · In progress</p>
+      <p class="voice-note">Voice interface · Loading</p>
+      <!-- WIDGET_PLACEHOLDER_END -->
     </div>
   </div>
 </section>
@@ -748,32 +751,60 @@
   // ── Ask Jarvis ────────────────────────────────────
   const responses = [
     {
-      keywords: ['experience', 'background', 'cv', 'resume', 'history'],
-      answer: "4x founder, 2x exits. The highlights reel: Thallo — captured 95% of the global carbon credit registry market, $500k ARR in 6 months. Monetalis — architected the world's largest on-chain RWA pool ($1.2bn in Treasury Bonds) in under 3 months. Ivno — CTO, team of 3, partnerships with BlackRock, BNYM, London Stock Exchange. Acquired by R3. FunFair — built the world's first Layer Two blockchain scaling protocol. That's not a CV. That's a compounding body of work."
+      keywords: ['experience', 'background', 'cv', 'resume', 'history', 'career', 'worked'],
+      answer: "4x founder, 2x exits. The highlights: Thallo (CEO) — captured 95% of the global carbon credit registry market, $500k ARR in 6 months, beat Flowcarbon who had 40x more funding. Monetalis — architected the world's largest on-chain RWA pool ($1.2bn Treasury Bonds on MakerDAO) in under 3 months. Ivno (CTO) — team of 3, partnerships with BlackRock, BNYM, London Stock Exchange, US Bank; acquired by R3 and absorbed into Corda. FunFair — built the world's first Layer Two blockchain scaling protocol. That's a compounding body of work, not a CV."
     },
     {
-      keywords: ['why hire', 'should i hire', 'hire ryan', 'reason to hire'],
-      answer: "Because you'll get 10x the throughput of a single hire. He sets direction; I handle execution. Most of your competitors are hiring people who work eight-hour days. Ryan operates around the clock — not personally, but operationally. That's a different kind of leverage."
+      keywords: ['why hire', 'should i hire', 'hire ryan', 'reason to hire', 'compelling', 'argument for'],
+      answer: "Because you'll get disproportionate output. He sets direction; the infrastructure handles execution. He ran Ivno partnerships with BlackRock using a team of 3. He shipped a $1.2bn RWA pool in 3 months with 5 people. He consistently does more with less — and then adds an AI layer on top. What looks like one hire is actually a functioning operational system."
     },
     {
-      keywords: ['shipped', 'built', 'launched', 'product', 'track record'],
-      answer: "Constantly. $1.2bn RWA pool shipped in under 3 months. First Layer Two protocol on Ethereum mainnet. Carbon market platform that beat well-funded a16z competitors. $106m World Bank/Euroclear bond issuance (4-person team). Ivno acquired by R3. Kit, the recruitment voice AI, live and in use. This hiring page — Trello card two days ago. Shipping is a habit. Either you have it or you don't."
+      keywords: ['thallo', 'carbon', 'climate', 'sustainability', 'flowcarbon'],
+      answer: "Thallo was the first platform to unify the entire global carbon credit registry market — 95% of the market, $500m in credits, 50 million tonnes. Ryan led it from idea to $40m valuation, hitting $500k ARR within 6 months of launch. Flowcarbon had Adam Neumann, a16z, and 40x more money. Ryan was already in the market before they'd chosen a blockchain."
     },
     {
-      keywords: ['available', 'when', 'start', 'timing', 'free', 'open to'],
-      answer: "He's selectively available — not desperate, not hiding. Reach out at ryan@codespec.co.uk. He responds same day, usually within the hour. That in itself tells you something."
+      keywords: ['monetalis', 'makerdao', 'rwa', 'real world asset', 'treasury', 'bonds', '1.2'],
+      answer: "At Monetalis, Ryan architected the world's largest on-chain Real World Asset pool — $1.2 billion in US Treasury Bonds on MakerDAO, generating over 50% of MakerDAO's total protocol revenue. He did it with 5 people, from contract to go-live in under 3 months. He designed the full Web3 and Solidity architecture himself."
     },
     {
-      keywords: ['weak', 'weakness', 'flaw', 'downside', 'problem', 'difficult', 'bad at'],
-      answer: "Impatient with slow consensus. Allergic to process theatre. Has been known to move on before the retrospective is scheduled. And the 'Reasons not to hire him' section at the bottom was accurate — I wrote it."
+      keywords: ['ivno', 'corda', 'r3', 'stablecoin', 'blackrock', 'institutional', 'acquisition', 'acquired'],
+      answer: "Ivno was Ryan's CTO role. Team of 3. They ran Corda's first Global Token Trial — 28 multinational entities, 18 banks, 3 securities exchanges, $18 billion in trial tokens transacted in 2 weeks. Built the first Dynamic Rules Engine on Corda, underpinned the $106m World Bank/Euroclear bond issuance, and brought BlackRock, BNYM, London Stock Exchange, and US Bank onto the platform. Ivno was acquired by R3."
     },
     {
-      keywords: ['different', 'unique', 'special', 'stand out', 'compared', 'versus', 'other'],
-      answer: "Most people hiring for a role are hiring for the role. Ryan comes with infrastructure. The overnight pipeline, 21 specialist subagents, autonomous execution — that's not a feature he switches on. It's how he operates. You're not just getting a person. You're getting a compounding system."
+      keywords: ['funfair', 'layer two', 'layer 2', 'ethereum', 'blockchain', 'scaling', 'web3', 'crypto', 'state channel'],
+      answer: "At FunFair, Ryan built the world's first Layer Two blockchain scaling protocol — State Channels on Ethereum mainnet. Took Ethereum from 15 TPS to 10,000+ with real-time throughput. The Layer Two ecosystem that followed that work is now worth $20 billion+. He's also an Ethereum core contributor and MetaMask contributor. He's been in the space since 2015."
     },
     {
-      keywords: ['what does he do', 'what does ryan do', 'role', 'what is he'],
-      answer: "Depends who you ask. Formally: founder and operator. Practically: he identifies where the value is, builds the thing that captures it, and moves on. He doesn't optimise for looking busy."
+      keywords: ['shipped', 'built', 'launched', 'product', 'track record', 'deliver', 'execution'],
+      answer: "$1.2bn RWA pool in under 3 months. World's first Layer Two protocol. Carbon market platform that beat a16z-backed competitors. $106m World Bank/Euroclear bond issuance, 4-person team. Ivno acquired by R3. Kit, the recruitment voice AI, live and in use. This hiring page — Trello card two days ago. Shipping is a habit. Either you have it or you don't."
+    },
+    {
+      keywords: ['available', 'when', 'start', 'timing', 'free', 'open to', 'looking for', 'roles'],
+      answer: "Selectively open. He's not job hunting — he's evaluating. The right role means: founding CTO or CPO at the intersection of AI and finance or infrastructure, Chief AI Officer where the transformation is real, NED or advisor where technical depth is the requirement, or a co-founder situation. Email him at ryan@codespec.co.uk. He responds fast."
+    },
+    {
+      keywords: ['weak', 'weakness', 'flaw', 'downside', 'problem', 'difficult', 'bad at', 'not good'],
+      answer: "Impatient with slow consensus. Allergic to process theatre. Moves at a pace that can feel like impatience if you're used to quarterly planning cycles. Has been early to a market or two — which is also how you get to be first. The 'Reasons not to hire him' section further down the page is accurate. I wrote it on his instruction."
+    },
+    {
+      keywords: ['different', 'unique', 'special', 'stand out', 'compared', 'versus', 'other candidates', 'distinguish'],
+      answer: "Most people hiring for a senior role are hiring for the role. Ryan comes with infrastructure. 21 specialist AI subagents, continuous execution pipeline, autonomous background work. That's not a novelty — it's how he operates. You're not just getting a person. You're getting a compounding system with a decade of hard-won technical scar tissue running it."
+    },
+    {
+      keywords: ['what does he do', 'what does ryan do', 'current role', 'currently', 'contxt', 'kit'],
+      answer: "He's Chief AI Officer and Co-Founder at Contxt — building the AI infrastructure layer for recruitment. Kit is the voice agent product. He's selectively open to the right roles alongside that. He's not a man who sits idle."
+    },
+    {
+      keywords: ['jarvis', 'what are you', 'who are you', 'ai assistant', 'how do you work'],
+      answer: "I'm Jarvis — the AI system Ryan built. I run briefings, research, writing, execution, and monitoring continuously throughout the day. This page was built by me from a Trello card. The team headshots were generated by Nano Banana. The proof pills were sourced from Ryan's CV and LinkedIn. I'm not a chatbot. I'm infrastructure."
+    },
+    {
+      keywords: ['speaking', 'keynote', 'conference', 'ripple', 'corda', 'gbbc', 'ambassador'],
+      answer: "Opening keynote at Ripple's flagship global summit in 2023. CordaCon 2019 and 2020. LA Blockchain Summit 2021. FIX 2020. He's also a Global Blockchain Business Council Ambassador — 500+ institutional members across 117 jurisdictions. He's not the person who attends these events. He's the person they build the agenda around."
+    },
+    {
+      keywords: ['contact', 'email', 'reach', 'get in touch', 'linkedin', 'message'],
+      answer: "Email: ryan@codespec.co.uk — he responds same day, usually within the hour. LinkedIn: linkedin.com/in/ryan-gledhill. That's it. No intake form, no scheduling link, just a reply."
     }
   ];
 
