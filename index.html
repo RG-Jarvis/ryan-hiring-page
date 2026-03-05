@@ -662,7 +662,10 @@
     </p>
 
     <div class="widget-wrap">
-      <elevenlabs-convai agent-id="agent_4501kjz1wyxyfx3rac5hjn1k37w3"></elevenlabs-convai>
+      <elevenlabs-convai
+        agent-id="agent_4501kjz1wyxyfx3rac5hjn1k37w3"
+        style="display:block;width:100%;min-height:80px;"
+      ></elevenlabs-convai>
     </div>
 
     <!-- Post-call CTA — shown after conversation ends via window.showPostCallCard() -->
@@ -887,12 +890,14 @@
     // Blobs positioned in VIEWPORT coordinates (y: 0–1 of viewport height).
     // Parallax: each blob drifts by scrollY * its own small parallaxFactor,
     // creating depth without leaving the visible area.
+    // Blobs: viewport-relative positions, visibly brighter than background.
+    // pf = parallax factor — higher = moves more relative to scroll, creating depth.
     const blobs = [
-      { x: 0.20, y: 0.15, r: 0.55, sp: 0.00018, phase: 0.0, pf: 0.04, col: [30, 15, 8]  },  // dark amber
-      { x: 0.78, y: 0.35, r: 0.48, sp: 0.00013, phase: 2.1, pf: 0.08, col: [8,  18, 28]  },  // dark blue
-      { x: 0.45, y: 0.55, r: 0.60, sp: 0.00010, phase: 4.3, pf: 0.12, col: [18, 10, 28]  },  // dark purple
-      { x: 0.25, y: 0.75, r: 0.50, sp: 0.00016, phase: 1.5, pf: 0.18, col: [28, 14, 6]   },  // dark ember
-      { x: 0.72, y: 0.90, r: 0.55, sp: 0.00012, phase: 3.7, pf: 0.24, col: [6,  20, 22]  },  // dark teal
+      { x: 0.18, y: 0.22, r: 0.55, sp: 0.00018, phase: 0.0, pf: 0.06, col: [90, 40, 8]   },  // amber
+      { x: 0.80, y: 0.42, r: 0.50, sp: 0.00013, phase: 2.1, pf: 0.12, col: [10, 45, 120]  },  // blue
+      { x: 0.42, y: 0.62, r: 0.62, sp: 0.00010, phase: 4.3, pf: 0.09, col: [55, 15, 100]  },  // purple
+      { x: 0.22, y: 0.78, r: 0.52, sp: 0.00016, phase: 1.5, pf: 0.15, col: [110, 40, 8]   },  // ember
+      { x: 0.75, y: 0.55, r: 0.58, sp: 0.00012, phase: 3.7, pf: 0.10, col: [8,  70, 80]   },  // teal
     ];
 
     function draw() {
@@ -900,21 +905,18 @@
       ctx.clearRect(0, 0, W, H);
 
       for (const b of blobs) {
-        // Organic horizontal drift
-        const cx = (b.x + Math.sin(t * b.sp + b.phase) * 0.10) * W;
-
-        // Viewport-relative Y + organic drift + parallax scroll offset
-        // The modulo keeps blobs wrapping within an extended viewport range
-        const baseY = b.y * H + Math.cos(t * b.sp * 0.7 + b.phase) * H * 0.08;
-        const parallaxOffset = scrollY * b.pf;
-        // Wrap into [-H*0.3 .. H*1.3] so blobs cycle smoothly
-        const extH = H * 1.6;
-        const cy = ((baseY - parallaxOffset) % extH + extH) % extH - H * 0.3;
+        // Organic drift
+        const cx = (b.x + Math.sin(t * b.sp + b.phase) * 0.08) * W;
+        // Base Y in viewport coords — blobs stay distributed across the screen.
+        // Parallax: as user scrolls down, each blob drifts up at its own rate (depth effect).
+        const driftY = Math.cos(t * b.sp * 0.7 + b.phase) * H * 0.06;
+        const cy = b.y * H + driftY - (scrollY * b.pf % H);
 
         const radius = b.r * Math.max(W, H);
 
         const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-        grad.addColorStop(0, `rgba(${b.col[0]}, ${b.col[1]}, ${b.col[2]}, 0.60)`);
+        grad.addColorStop(0, `rgba(${b.col[0]}, ${b.col[1]}, ${b.col[2]}, 0.55)`);
+        grad.addColorStop(0.5, `rgba(${b.col[0]}, ${b.col[1]}, ${b.col[2]}, 0.18)`);
         grad.addColorStop(1, `rgba(${b.col[0]}, ${b.col[1]}, ${b.col[2]}, 0)`);
 
         ctx.beginPath();
@@ -929,8 +931,8 @@
   })();
 </script>
 
-<!-- ElevenLabs ConvAI widget — pinned version, loaded after DOM ready -->
-<script src="https://unpkg.com/@elevenlabs/convai-widget-embed@0.10.0" type="text/javascript"></script>
+<!-- ElevenLabs ConvAI widget -->
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
 
 </body>
 </html>
