@@ -99,38 +99,67 @@
     #how .tl-item.active .tl-time { color: var(--orange); }
     #how .tl-item.active .tl-text { color: var(--text); }
 
-    /* ── PROOF PILLS ── */
+    /* ── PROOF PILLS — flip cards ── */
     #proof { background: #070707; }
     #proof .pills-lead {
       font-size: clamp(0.95rem, 2.2vw, 1.15rem); font-weight: 300; color: var(--muted);
       margin-top: 1.5rem; margin-bottom: 2rem;
     }
     #proof .pills-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1rem; text-align: left;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.2rem; text-align: left;
     }
+    /* Outer wrapper — fixed height, perspective container */
     #proof .pill {
-      border: 1px solid #222; border-radius: 8px; padding: 1.3rem 1.5rem; cursor: pointer;
-      transition: border-color 0.25s ease, background 0.25s ease; position: relative; overflow: hidden;
+      perspective: 900px; cursor: pointer;
+      min-height: 160px;
     }
-    #proof .pill:hover { border-color: #3a3a3a; background: #0d0d0d; }
-    #proof .pill.open { border-color: #555; background: #0f0f0f; }
+    /* Inner — the thing that rotates */
+    #proof .pill-inner {
+      position: relative; width: 100%; height: 100%; min-height: 160px;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+    }
+    #proof .pill.flipped .pill-inner { transform: rotateY(180deg); }
+    /* Shared face styles */
+    #proof .pill-front,
+    #proof .pill-back {
+      position: absolute; inset: 0;
+      border: 1px solid #222; border-radius: 10px; padding: 1.4rem 1.5rem;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      display: flex; flex-direction: column; justify-content: flex-start;
+    }
+    #proof .pill:hover .pill-front { border-color: #3a3a3a; }
+    #proof .pill.flipped .pill-front { border-color: #3a3a3a; }
+    /* Front face */
+    #proof .pill-front { background: #0b0b0b; }
     #proof .pill-tag {
-      display: inline-block; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--orange); margin-bottom: 0.65rem;
+      display: inline-block; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 0.7rem;
     }
-    #proof .pill-q { font-size: 0.9rem; font-weight: 400; color: var(--text); line-height: 1.45; padding-right: 1.8rem; }
-    #proof .pill-q::before { content: '"'; color: #444; }
-    #proof .pill-q::after { content: '"'; color: #444; }
-    #proof .pill-toggle {
-      position: absolute; top: 1.3rem; right: 1.2rem; font-size: 0.8rem;
-      color: var(--orange); transition: transform 0.25s ease; user-select: none;
+    #proof .pill-q {
+      font-size: 0.88rem; font-weight: 400; color: var(--text); line-height: 1.5;
+      flex: 1;
     }
-    #proof .pill.open .pill-toggle { transform: rotate(45deg); }
+    #proof .pill-q::before { content: '"'; color: #333; }
+    #proof .pill-q::after  { content: '"'; color: #333; }
+    #proof .pill-hint {
+      margin-top: 1rem; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #333; font-weight: 400;
+    }
+    /* Back face — rotated 180° in Y */
+    #proof .pill-back {
+      background: #101010; border-color: #2e2e2e;
+      transform: rotateY(180deg);
+      justify-content: space-between;
+    }
+    #proof .pill-back .pill-tag { color: var(--orange); margin-bottom: 0.6rem; }
     #proof .pill-answer {
-      display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #1a1a1a;
-      font-size: 0.84rem; font-weight: 300; color: var(--muted); line-height: 1.7;
+      font-size: 0.8rem; font-weight: 300; color: #aaa; line-height: 1.7; flex: 1;
     }
-    #proof .pill.open .pill-answer { display: block; }
+    #proof .pill-back-close {
+      margin-top: 1rem; font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #333; font-weight: 400;
+    }
     #proof .proof-cta {
       margin-top: 2rem; font-size: 0.78rem; color: #333; text-align: center;
       letter-spacing: 0.06em; font-weight: 300;
@@ -401,56 +430,92 @@
     <div class="pills-grid reveal reveal-delay-3">
 
       <div class="pill" role="button" tabindex="0" aria-expanded="false">
-        <span class="pill-tag">Lean vs funded</span>
-        <p class="pill-q">Outcompetes people with 40x more money?</p>
-        <span class="pill-toggle" aria-hidden="true">+</span>
-        <div class="pill-answer">
-          At Thallo, Ryan led a lean team to capture 95% of the global carbon credit registry market — consolidating $500m in credits onto a single API — while competitors with 40x more funding were still figuring out their stack. $500k ARR within 6 months of launch. Flowcarbon raised $70m, had Adam Neumann and a16z behind it. Ryan shipped first.
+        <div class="pill-inner">
+          <div class="pill-front">
+            <span class="pill-tag">Lean vs funded</span>
+            <p class="pill-q">Outcompetes people with 40x more money?</p>
+            <p class="pill-hint">Tap to see the proof →</p>
+          </div>
+          <div class="pill-back">
+            <span class="pill-tag">Lean vs funded</span>
+            <p class="pill-answer">At Thallo, Ryan led a lean team to capture 95% of the global carbon credit registry market — consolidating $500m in credits onto a single API — while competitors with 40x more funding were still figuring out their stack. $500k ARR within 6 months of launch. Flowcarbon raised $70m, had Adam Neumann and a16z behind it. Ryan shipped first.</p>
+            <p class="pill-back-close">← Tap to flip back</p>
+          </div>
         </div>
       </div>
 
       <div class="pill" role="button" tabindex="0" aria-expanded="false">
-        <span class="pill-tag">Enterprise at scale</span>
-        <p class="pill-q">Gets institutional names across the line?</p>
-        <span class="pill-toggle" aria-hidden="true">+</span>
-        <div class="pill-answer">
-          At Ivno, with a team of three people, Ryan led the partnerships that brought BlackRock, Bank of New York Mellon, the London Stock Exchange, and US Bank onto a single DLT platform. Then the tech was acquired by R3 and absorbed into Corda's core. He did not have a large team. He had a sharp one.
+        <div class="pill-inner">
+          <div class="pill-front">
+            <span class="pill-tag">Enterprise at scale</span>
+            <p class="pill-q">Gets institutional names across the line?</p>
+            <p class="pill-hint">Tap to see the proof →</p>
+          </div>
+          <div class="pill-back">
+            <span class="pill-tag">Enterprise at scale</span>
+            <p class="pill-answer">At Ivno, with a team of three people, Ryan led the partnerships that brought BlackRock, Bank of New York Mellon, the London Stock Exchange, and US Bank onto a single DLT platform. Then the tech was acquired by R3 and absorbed into Corda's core. He did not have a large team. He had a sharp one.</p>
+            <p class="pill-back-close">← Tap to flip back</p>
+          </div>
         </div>
       </div>
 
       <div class="pill" role="button" tabindex="0" aria-expanded="false">
-        <span class="pill-tag">Technical depth</span>
-        <p class="pill-q">Actually understands what he's building?</p>
-        <span class="pill-toggle" aria-hidden="true">+</span>
-        <div class="pill-answer">
-          Ryan architected the world's first Layer Two blockchain scaling protocol at FunFair — taking Ethereum from 15 TPS to 10,000+ using State Channels. That work kickstarted what became a $20bn+ ecosystem. He's also an Ethereum core and MetaMask contributor. He doesn't delegate the hard problems. He solves them.
+        <div class="pill-inner">
+          <div class="pill-front">
+            <span class="pill-tag">Technical depth</span>
+            <p class="pill-q">Actually understands what he's building?</p>
+            <p class="pill-hint">Tap to see the proof →</p>
+          </div>
+          <div class="pill-back">
+            <span class="pill-tag">Technical depth</span>
+            <p class="pill-answer">Ryan architected the world's first Layer Two blockchain scaling protocol at FunFair — taking Ethereum from 15 TPS to 10,000+ using State Channels. That work kickstarted what became a $20bn+ ecosystem. He's also an Ethereum core and MetaMask contributor. He doesn't delegate the hard problems. He solves them.</p>
+            <p class="pill-back-close">← Tap to flip back</p>
+          </div>
         </div>
       </div>
 
       <div class="pill" role="button" tabindex="0" aria-expanded="false">
-        <span class="pill-tag">Speed to live</span>
-        <p class="pill-q">Delivers in weeks, not quarters?</p>
-        <span class="pill-toggle" aria-hidden="true">+</span>
-        <div class="pill-answer">
-          At Monetalis, Ryan architected the world's largest on-chain Real World Asset pool — $1.2 billion in Treasury Bonds on MakerDAO, generating over 50% of MakerDAO's protocol revenue — from a standing start to go-live in under three months. Five-person team. Full Web3 and Solidity architecture. His.
+        <div class="pill-inner">
+          <div class="pill-front">
+            <span class="pill-tag">Speed to live</span>
+            <p class="pill-q">Delivers in weeks, not quarters?</p>
+            <p class="pill-hint">Tap to see the proof →</p>
+          </div>
+          <div class="pill-back">
+            <span class="pill-tag">Speed to live</span>
+            <p class="pill-answer">At Monetalis, Ryan architected the world's largest on-chain Real World Asset pool — $1.2 billion in Treasury Bonds on MakerDAO, generating over 50% of MakerDAO's protocol revenue — from a standing start to go-live in under three months. Five-person team. Full Web3 and Solidity architecture. His.</p>
+            <p class="pill-back-close">← Tap to flip back</p>
+          </div>
         </div>
       </div>
 
       <div class="pill" role="button" tabindex="0" aria-expanded="false">
-        <span class="pill-tag">World firsts</span>
-        <p class="pill-q">Has done things that hadn't been done before?</p>
-        <span class="pill-toggle" aria-hidden="true">+</span>
-        <div class="pill-answer">
-          First global carbon credit registry aggregation platform. First Layer Two scaling protocol on Ethereum mainnet. World's largest RWA pool (at the time). First Dynamic Rules Engine on Corda. Technology underpinning the $106m World Bank / Euroclear bond issuance. And the world's first commercial State Channels implementation. That's not a streak of luck — it's a pattern.
+        <div class="pill-inner">
+          <div class="pill-front">
+            <span class="pill-tag">World firsts</span>
+            <p class="pill-q">Has done things that hadn't been done before?</p>
+            <p class="pill-hint">Tap to see the proof →</p>
+          </div>
+          <div class="pill-back">
+            <span class="pill-tag">World firsts</span>
+            <p class="pill-answer">First global carbon credit registry aggregation platform. First Layer Two scaling protocol on Ethereum mainnet. World's largest RWA pool (at the time). First Dynamic Rules Engine on Corda. Technology underpinning the $106m World Bank / Euroclear bond issuance. And the world's first commercial State Channels implementation. That's not a streak of luck — it's a pattern.</p>
+            <p class="pill-back-close">← Tap to flip back</p>
+          </div>
         </div>
       </div>
 
       <div class="pill" role="button" tabindex="0" aria-expanded="false">
-        <span class="pill-tag">Keynote credibility</span>
-        <p class="pill-q">Operates at the level where people ask you to speak?</p>
-        <span class="pill-toggle" aria-hidden="true">+</span>
-        <div class="pill-answer">
-          Opening keynote at Ripple's flagship global summit. LA Blockchain Summit. CordaCon 2019 and 2020. FIX 2020. He's not the person who attends these conferences. He's the person they build the agenda around. Ambassador for the Global Blockchain Business Council — 500+ institutional members across 117 jurisdictions.
+        <div class="pill-inner">
+          <div class="pill-front">
+            <span class="pill-tag">Keynote credibility</span>
+            <p class="pill-q">Operates at the level where people ask you to speak?</p>
+            <p class="pill-hint">Tap to see the proof →</p>
+          </div>
+          <div class="pill-back">
+            <span class="pill-tag">Keynote credibility</span>
+            <p class="pill-answer">Opening keynote at Ripple's flagship global summit. LA Blockchain Summit. CordaCon 2019 and 2020. FIX 2020. He's not the person who attends these conferences. He's the person they build the agenda around. Ambassador for the Global Blockchain Business Council — 500+ institutional members across 117 jurisdictions.</p>
+            <p class="pill-back-close">← Tap to flip back</p>
+          </div>
         </div>
       </div>
 
@@ -734,14 +799,21 @@
   const howSection = document.getElementById('how');
   if (howSection) tlObs.observe(howSection);
 
-  // ── Proof pills ───────────────────────────────────
+  // ── Proof pills — flip cards ──────────────────────
   document.querySelectorAll('.pill').forEach(pill => {
-    function toggle() {
-      const open = pill.classList.toggle('open');
-      pill.setAttribute('aria-expanded', open);
+    function flip() {
+      const flipped = pill.classList.toggle('flipped');
+      pill.setAttribute('aria-expanded', flipped);
+      // Ensure the inner height matches the taller face after flip
+      const front = pill.querySelector('.pill-front');
+      const back  = pill.querySelector('.pill-back');
+      const inner = pill.querySelector('.pill-inner');
+      const h = Math.max(front.scrollHeight, back.scrollHeight);
+      inner.style.minHeight = h + 'px';
+      pill.style.minHeight  = h + 'px';
     }
-    pill.addEventListener('click', toggle);
-    pill.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+    pill.addEventListener('click', flip);
+    pill.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
   });
 
   // Ask Jarvis text bot removed — replaced by ElevenLabs convai widget
