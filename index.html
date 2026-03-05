@@ -92,10 +92,10 @@
     }
     #how .tl-item:first-child { border-top: 1px solid #151515; }
     #how .tl-time {
-      font-size: 0.68rem; font-weight: 500; color: #3a3a3a; padding-top: 0.2rem;
+      font-size: 0.68rem; font-weight: 500; color: #666; padding-top: 0.2rem;
       letter-spacing: 0.06em; text-align: right; transition: color 0.4s ease;
     }
-    #how .tl-text { font-size: 0.88rem; font-weight: 300; color: #555; line-height: 1.55; transition: color 0.4s ease; }
+    #how .tl-text { font-size: 0.88rem; font-weight: 300; color: #aaa; line-height: 1.55; transition: color 0.4s ease; }
     #how .tl-item.active .tl-time { color: var(--orange); }
     #how .tl-item.active .tl-text { color: var(--text); }
 
@@ -140,8 +140,8 @@
       font-size: 0.88rem; font-weight: 400; color: var(--text); line-height: 1.5;
       flex: 1;
     }
-    #proof .pill-q::before { content: '"'; color: #333; }
-    #proof .pill-q::after  { content: '"'; color: #333; }
+    #proof .pill-q::before { content: '"'; color: #555; }
+    #proof .pill-q::after  { content: '"'; color: #555; }
     #proof .pill-hint {
       margin-top: 1rem; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
       color: #555; font-weight: 400;
@@ -204,9 +204,10 @@
     #voice .widget-wrap {
       margin-top: 2rem; max-width: 640px; margin-left: auto; margin-right: auto;
       display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+      position: relative; z-index: 9999;
     }
-    /* ElevenLabs renders a floating orb/button — let it sit naturally */
-    elevenlabs-convai { display: block; width: 100%; }
+    /* ElevenLabs renders its own shadow DOM — ensure it stacks above everything */
+    elevenlabs-convai { display: block; width: 100%; position: relative; z-index: 9999; }
 
     /* ── CLOSER ── */
     #closer h2 span.line { display: block; }
@@ -226,7 +227,7 @@
     #nothire .reason-item:first-child { border-top: 1px solid #1a1a1a; }
     #nothire .reason-title { font-size: 0.88rem; font-weight: 500; color: var(--text); margin-bottom: 0.35rem; }
     #nothire .reason-body { font-size: 0.84rem; font-weight: 300; color: #999; line-height: 1.65; }
-    #nothire .footnote { margin-top: 2rem; font-size: 0.78rem; color: #444; font-weight: 300; text-align: center; line-height: 1.6; }
+    #nothire .footnote { margin-top: 2rem; font-size: 0.78rem; color: #777; font-weight: 300; text-align: center; line-height: 1.6; }
 
     /* ── FOOTER ── */
     footer { padding: 2rem; text-align: center; font-size: 0.7rem; color: #2a2a2a; letter-spacing: 0.08em; border-top: 1px solid #111; }
@@ -243,7 +244,7 @@
     }
     #sticky-bar.visible { transform: translateY(0); pointer-events: auto; }
     #sticky-bar .bar-label {
-      font-size: 0.65rem; color: #3a3a3a; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 0.65rem; color: #777; letter-spacing: 0.12em; text-transform: uppercase;
       white-space: nowrap; flex-shrink: 0;
     }
     #sticky-bar .bar-links { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; }
@@ -255,11 +256,11 @@
     }
     #sticky-bar .bar-link:hover { color: var(--text); border-color: #444; }
     #sticky-bar .bar-dismiss {
-      background: none; border: none; color: #2a2a2a; cursor: pointer;
+      background: none; border: none; color: #666; cursor: pointer;
       font-size: 1rem; line-height: 1; padding: 0.2rem 0.4rem; margin-left: 0.4rem;
       transition: color 0.2s ease; flex-shrink: 0;
     }
-    #sticky-bar .bar-dismiss:hover { color: #555; }
+    #sticky-bar .bar-dismiss:hover { color: #aaa; }
 
     /* ── POST-CALL CARD ── */
     #post-call-card {
@@ -524,7 +525,7 @@
 
     </div>
 
-    <p class="proof-cta reveal reveal-delay-4">Full profile: <a href="https://www.linkedin.com/in/ryan-gledhill/" target="_blank" rel="noopener" style="color: #444; text-decoration: none; border-bottom: 1px solid #333;">linkedin.com/in/ryan-gledhill</a></p>
+    <p class="proof-cta reveal reveal-delay-4">Full profile: <a href="https://www.linkedin.com/in/ryan-gledhill/" target="_blank" rel="noopener" style="color: #999; text-decoration: none; border-bottom: 1px solid #555;">linkedin.com/in/ryan-gledhill</a></p>
   </div>
 </section>
 
