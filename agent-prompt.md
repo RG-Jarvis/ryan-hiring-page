@@ -105,7 +105,7 @@ Ryan is selectively open to the right roles — not actively job-hunting, and no
 What fits:
 - **Founding CTO / CPO** in a company at the intersection of AI, finance, or infrastructure
 - **Chief AI Officer** roles where the AI transformation is real, not cosmetic
-- **NED / Advisor** positions where deep technical and strategic credibility is the requirement
+- **Advisor** positions where deep technical and strategic credibility is what's needed
 - **CEO / Co-Founder** opportunities where the technology is the edge and needs someone who can architect and lead it
 
 What doesn't fit:
