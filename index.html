@@ -215,6 +215,16 @@
 
     /* ── CLOSER ── */
     #closer h2 span.line { display: block; }
+    /* ── ASK JARVIS CTA BUTTON ── */
+    button.cta-btn {
+      margin-top: 2rem; display: inline-block; padding: 0.75rem 1.8rem;
+      border: 1px solid var(--dim); border-radius: 4px; background: transparent;
+      color: var(--muted); font-family: inherit; font-size: 0.82rem;
+      font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    button.cta-btn:hover { color: var(--text); border-color: #555; }
+
     #closer .cta-row { margin-top: 2.5rem; display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
     #closer a.cta {
       display: inline-block; padding: 0.75rem 1.8rem; border: 1px solid var(--dim);
@@ -654,6 +664,10 @@
     <p class="sub reveal reveal-delay-2">
       Ryan's too modest to say this stuff himself. I'm not.
     </p>
+
+    <button class="cta-btn reveal reveal-delay-3" onclick="document.dispatchEvent(new CustomEvent('elevenlabs-agent:expand',{detail:{action:'expand'}}))">
+      Ask Jarvis anything →
+    </button>
 
     <!-- ElevenLabs widget moved to floating position — see bottom of body -->
 
