@@ -314,10 +314,183 @@
     }
 
 
+    /* ── SYSTEMS (AI Architecture) ── */
+    #systems { }
+
+    .systems-block {
+      margin-top: 3rem; text-align: left;
+      max-width: 620px; margin-left: auto; margin-right: auto;
+    }
+    .systems-block:first-of-type { margin-top: 2.5rem; }
+
+    .systems-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.2rem); font-weight: 500;
+      color: var(--text); letter-spacing: 0.02em; margin-bottom: 0.8rem;
+    }
+
+    .systems-desc {
+      font-size: 0.88rem; font-weight: 300; color: #aaa;
+      line-height: 1.7; margin-bottom: 1.5rem;
+    }
+
+    .systems-footnote {
+      margin-top: 1rem; font-size: 0.75rem; font-weight: 300;
+      color: #666; line-height: 1.5; font-style: italic;
+    }
+
+    /* ── Memory Stack Diagram ── */
+    .mem-stack {
+      display: flex; flex-direction: column; align-items: stretch;
+      gap: 0; margin: 1.5rem 0;
+    }
+
+    .mem-layer {
+      display: flex; align-items: center; gap: 1rem;
+      border: 1px solid #222; border-radius: 8px; padding: 1rem 1.2rem;
+      background: #0d0d0d;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .mem-layer:hover {
+      border-color: #3a3a3a;
+      box-shadow: 0 0 20px rgba(255, 107, 43, 0.04);
+    }
+
+    .mem-layer-badge {
+      flex-shrink: 0; width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 6px; font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.08em; color: var(--bg);
+    }
+    .mem-l1 .mem-layer-badge { background: var(--orange); }
+    .mem-l2 .mem-layer-badge { background: #b8541f; }
+    .mem-l3 .mem-layer-badge { background: #7a3815; }
+
+    .mem-layer-content {
+      display: flex; flex-direction: column; gap: 0.2rem;
+    }
+    .mem-layer-name {
+      font-size: 0.88rem; font-weight: 400; color: var(--text);
+    }
+    .mem-layer-detail {
+      font-size: 0.72rem; font-weight: 300; color: #777;
+      letter-spacing: 0.02em;
+    }
+
+    .mem-connector {
+      width: 1px; height: 16px; background: #2a2a2a;
+      margin-left: 2.3rem; /* aligned with center of badge */
+    }
+
+    /* ── Reflectivity Flow ── */
+    .reflect-flow {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 0; margin: 1.5rem 0; flex-wrap: nowrap;
+    }
+
+    .reflect-step {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.4rem; flex: 0 1 auto; min-width: 0;
+    }
+    .reflect-icon {
+      font-size: 1.2rem; line-height: 1;
+    }
+    .reflect-label {
+      font-size: 0.65rem; font-weight: 400; color: #999;
+      letter-spacing: 0.04em; text-align: center;
+      white-space: nowrap;
+    }
+
+    .reflect-arrow {
+      flex: 1 1 auto; height: 1px; background: #2a2a2a;
+      position: relative; min-width: 12px; max-width: 60px;
+      margin: 0 0.3rem; align-self: center;
+      /* offset to align with icon row, not label */
+      margin-bottom: 1.2rem;
+    }
+    .reflect-arrow::after {
+      content: '›'; position: absolute; right: -3px; top: 50%;
+      transform: translateY(-50%); color: #2a2a2a; font-size: 0.8rem;
+      line-height: 1;
+    }
+
+    /* ── Council Flow ── */
+    .council-flow {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 0; margin: 1.5rem 0; flex-wrap: nowrap;
+    }
+    .council-step {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.4rem; flex: 0 1 auto; min-width: 0;
+    }
+    .council-icon {
+      font-size: 1.2rem; line-height: 1;
+    }
+    .council-label {
+      font-size: 0.62rem; font-weight: 400; color: #999;
+      letter-spacing: 0.04em; text-align: center;
+      white-space: nowrap; line-height: 1.3;
+    }
+    .council-arrow {
+      flex: 1 1 auto; height: 1px; background: #2a2a2a;
+      position: relative; min-width: 8px; max-width: 40px;
+      margin: 0 0.2rem; align-self: center;
+      margin-bottom: 1.4rem;
+    }
+    .council-arrow::after {
+      content: '›'; position: absolute; right: -3px; top: 50%;
+      transform: translateY(-50%); color: #2a2a2a; font-size: 0.8rem;
+      line-height: 1;
+    }
+
+    /* ── Orchestra Stat ── */
+    .orchestra-stat {
+      display: flex; align-items: baseline; gap: 1rem;
+      margin: 1.5rem 0 0.5rem;
+    }
+    .orchestra-number {
+      font-size: 3rem; font-weight: 300; color: var(--orange);
+      letter-spacing: -0.04em; line-height: 1;
+    }
+    .orchestra-label {
+      font-size: 0.82rem; font-weight: 300; color: #777;
+      line-height: 1.4;
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 700px) {
       #team .team-grid { grid-template-columns: repeat(2, 1fr); }
       #proof .pills-grid { grid-template-columns: 1fr; }
+      /* Systems section mobile */
+      .reflect-flow {
+        flex-direction: column; align-items: stretch; gap: 0;
+      }
+      .reflect-step {
+        flex-direction: row; gap: 0.8rem; padding: 0.5rem 0;
+      }
+      .reflect-arrow {
+        width: 1px; height: 16px; min-width: unset; max-width: unset;
+        margin: 0 0 0 0.6rem; margin-bottom: 0;
+        align-self: flex-start;
+      }
+      .reflect-arrow::after {
+        content: '›'; right: auto; left: 50%; top: auto; bottom: -4px;
+        transform: translateX(-50%) rotate(90deg);
+      }
+      .council-flow {
+        flex-direction: column; align-items: stretch; gap: 0;
+      }
+      .council-step {
+        flex-direction: row; gap: 0.8rem; padding: 0.5rem 0;
+      }
+      .council-arrow {
+        width: 1px; height: 16px; min-width: unset; max-width: unset;
+        margin: 0 0 0 0.6rem; margin-bottom: 0;
+        align-self: flex-start;
+      }
+      .council-arrow::after {
+        content: '›'; right: auto; left: 50%; top: auto; bottom: -4px;
+        transform: translateX(-50%) rotate(90deg);
+      }
     }
     @media (max-width: 600px) {
       section { padding: 3rem 1.5rem; }
@@ -326,6 +499,9 @@
       #ask button.ask-btn { border-top: 1px solid var(--dim); }
       #closer .cta-row { flex-direction: column; align-items: center; }
       #team .team-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      /* Systems section small mobile */
+      .systems-block { padding: 0 0.25rem; }
+      .orchestra-stat { flex-direction: column; gap: 0.3rem; }
     }
   </style>
 </head>
@@ -529,7 +705,7 @@
         <div class="pill-inner">
           <div class="pill-front">
             <span class="pill-tag">Keynote credibility</span>
-            <p class="pill-q">Operates at the level where people ask you to speak?</p>
+            <p class="pill-q">Operates at the level where audiences genuinely want to listen?</p>
             <p class="pill-hint">Tap to see the proof →</p>
           </div>
           <div class="pill-back">
@@ -560,8 +736,8 @@
       <p>
         What you actually get: someone who identifies the right problem before most people have finished
         reading the brief. Who has shipped under pressure enough times to know the difference between a
-        blocker and noise. Who delegates aggressively — including to his own infrastructure — and gets
-        disproportionate output as a result.
+        blocker and noise. Who builds systems that multiply his output — and actually uses them —
+        and consistently gets disproportionate results as a consequence.
       </p>
       <br />
       <p>
@@ -571,6 +747,179 @@
     </blockquote>
   </div>
 </section>
+<!-- ══════════════════════════════════════════════════
+     SECTION — HOW HE THINKS ABOUT AI SYSTEMS
+═══════════════════════════════════════════════════ -->
+<section id="systems">
+  <div class="section-inner wide">
+    <p class="label reveal">Under the hood</p>
+    <h2 class="reveal reveal-delay-1">
+      How the system<br />
+      <em>actually works.</em>
+    </h2>
+    <p class="sub reveal reveal-delay-2">
+      This isn't ChatGPT with a wrapper. It's a purpose-built architecture
+      designed to compound capability over time. Here's what that means in practice.
+    </p>
+
+    <!-- ── MEMORY MODEL ── -->
+    <div class="systems-block reveal reveal-delay-3" aria-label="Memory architecture diagram">
+      <h3 class="systems-subtitle">Memory that survives restarts</h3>
+      <p class="systems-desc">
+        LLMs forget everything between sessions. So I built a three-tier memory model
+        inspired by human cognition — working memory, episodic recall, and semantic search.
+        All on the free tier. No vector databases. No vendor lock-in.
+      </p>
+
+      <div class="mem-stack" role="img" aria-label="Three-layer memory architecture: L1 working memory, L2 episodic logs, L3 semantic life graph">
+        <div class="mem-layer mem-l3">
+          <div class="mem-layer-badge">L3</div>
+          <div class="mem-layer-content">
+            <span class="mem-layer-name">Life Graph</span>
+            <span class="mem-layer-detail">100+ atomic facts · semantic search · life-search.mjs</span>
+          </div>
+        </div>
+        <div class="mem-connector" aria-hidden="true"></div>
+        <div class="mem-layer mem-l2">
+          <div class="mem-layer-badge">L2</div>
+          <div class="mem-layer-content">
+            <span class="mem-layer-name">Episodic Memory</span>
+            <span class="mem-layer-detail">Daily session logs · memory/YYYY-MM-DD.md · raw context</span>
+          </div>
+        </div>
+        <div class="mem-connector" aria-hidden="true"></div>
+        <div class="mem-layer mem-l1">
+          <div class="mem-layer-badge">L1</div>
+          <div class="mem-layer-content">
+            <span class="mem-layer-name">Working Memory</span>
+            <span class="mem-layer-detail">MEMORY.md · ~1,800 token cap · curated tacit knowledge</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="systems-footnote">
+        Designed for compaction resilience — when context windows shrink, the important stuff survives.
+      </p>
+    </div>
+
+    <!-- ── REFLECTIVITY LOOP ── -->
+    <div class="systems-block reveal" aria-label="Reflectivity capability loop">
+      <h3 class="systems-subtitle">Capability that compounds</h3>
+      <p class="systems-desc">
+        After every non-trivial task, the system captures what worked, what didn't,
+        and what to do differently. Those captures batch to a senior model for retrospective review.
+        The output becomes Standing Rules — permanent overrides that persist across every future session.
+        The same mistake is never made twice.
+      </p>
+
+      <div class="reflect-flow" role="img" aria-label="Reflectivity loop: Task completes, capture tagged, batch to Opus, standing rules written, rules persist">
+        <div class="reflect-step">
+          <span class="reflect-icon" aria-hidden="true">⚡</span>
+          <span class="reflect-label">Task completes</span>
+        </div>
+        <div class="reflect-arrow" aria-hidden="true"></div>
+        <div class="reflect-step">
+          <span class="reflect-icon" aria-hidden="true">📝</span>
+          <span class="reflect-label">[REFLECT] capture</span>
+        </div>
+        <div class="reflect-arrow" aria-hidden="true"></div>
+        <div class="reflect-step">
+          <span class="reflect-icon" aria-hidden="true">🧠</span>
+          <span class="reflect-label">Opus retrospective</span>
+        </div>
+        <div class="reflect-arrow" aria-hidden="true"></div>
+        <div class="reflect-step">
+          <span class="reflect-icon" aria-hidden="true">📌</span>
+          <span class="reflect-label">Standing Rules</span>
+        </div>
+      </div>
+
+      <p class="systems-footnote">
+        Goal: the system gets measurably better with every task it runs. Compounding, not linear.
+      </p>
+    </div>
+
+    <!-- ── MULTI-AGENT ORCHESTRA ── -->
+    <div class="systems-block reveal" aria-label="Multi-agent orchestra overview">
+      <h3 class="systems-subtitle">21 agents, one conductor</h3>
+      <p class="systems-desc">
+        Not one AI doing everything — a purpose-built orchestra of specialists.
+        Strategy routes to Magnus. Copy routes to Quill. Architecture routes to Dilbs.
+        The conductor (Jarvis) picks the right agent, the right model tier, and the right
+        moment. Opus for the decisions that matter. Sonnet for execution volume. Haiku for the grunt work.
+      </p>
+
+      <div class="orchestra-stat">
+        <div class="orchestra-number">21</div>
+        <div class="orchestra-label">Specialist agents running in parallel</div>
+      </div>
+
+      <p class="systems-desc" style="margin-top: 1rem;">
+        The result is asymmetric leverage — the most expensive model only fires when the
+        problem demands it. Everything else runs lean. That's how you get Opus-quality
+        output at Haiku-level cost.
+      </p>
+    </div>
+
+    <!-- ── KAMIKAZE COUNCIL ── -->
+    <div class="systems-block reveal" aria-label="Kamikaze Council adversarial deliberation engine">
+      <h3 class="systems-subtitle">Kamikaze Council</h3>
+      <p class="systems-desc">
+        High-stakes decisions don't get a single model's opinion. They get a war room.
+        The Kamikaze Council is a multi-model adversarial deliberation engine — a purpose-built
+        system for decisions where being wrong is expensive.
+      </p>
+      <p class="systems-desc">
+        The question is hardened (pre-processed to remove bias and ambiguity), then fired
+        simultaneously at four AI councillors — each from a different model family, each with
+        a distinct epistemic style. They don't see each other's answers. Then they do: each
+        reviews the others anonymously, pressure-testing the reasoning rather than the conclusion.
+        A Chairman (Opus) synthesises. If the models don't converge, another round runs automatically.
+      </p>
+
+      <div class="council-flow" role="img" aria-label="Council flow: question hardened, four councillors deliberate in parallel, peer review, chairman synthesises, convergence checked">
+        <div class="council-step">
+          <span class="council-icon" aria-hidden="true">🔧</span>
+          <span class="council-label">Harden<br/>question</span>
+        </div>
+        <div class="council-arrow" aria-hidden="true"></div>
+        <div class="council-step">
+          <span class="council-icon" aria-hidden="true">⚔️</span>
+          <span class="council-label">4 models<br/>in parallel</span>
+        </div>
+        <div class="council-arrow" aria-hidden="true"></div>
+        <div class="council-step">
+          <span class="council-icon" aria-hidden="true">🔍</span>
+          <span class="council-label">Blind<br/>peer review</span>
+        </div>
+        <div class="council-arrow" aria-hidden="true"></div>
+        <div class="council-step">
+          <span class="council-icon" aria-hidden="true">🧠</span>
+          <span class="council-label">Chairman<br/>synthesises</span>
+        </div>
+        <div class="council-arrow" aria-hidden="true"></div>
+        <div class="council-step">
+          <span class="council-icon" aria-hidden="true">✅</span>
+          <span class="council-label">Converge<br/>or recurse</span>
+        </div>
+      </div>
+
+      <p class="systems-desc" style="margin-top: 1.5rem;">
+        Single mode runs in ~90 seconds. Multi-round Kamikaze mode — where the council debates
+        until genuine convergence — runs until it's settled.
+        The whole thing costs less than a coffee.
+        The output is a structured verdict with minority dissent preserved.
+      </p>
+
+      <p class="systems-footnote">
+        Built because important decisions deserve more than one model's best guess — and because
+        epistemic diversity is the cheapest insurance against expensive mistakes.
+      </p>
+    </div>
+
+  </div>
+</section>
+
 <!-- ══════════════════════════════════════════════════
      SECTION 6 — THE TEAM
 ═══════════════════════════════════════════════════ -->
@@ -621,7 +970,7 @@
         </div>
         <span class="member-name">Quill</span>
         <span class="member-role">Copy &amp; Narrative</span>
-        <p class="member-bio">Finds the sentence that actually lands. Turns Ryan's bluntness into something people want to read.</p>
+        <p class="member-bio">Finds the sentence that actually lands. Translates Ryan's instinct for saying exactly what needs saying into something people remember.</p>
       </div>
 
       <div class="team-member">
@@ -690,9 +1039,9 @@
   <div class="section-inner">
     <p class="label reveal">In summary</p>
     <h2 class="reveal reveal-delay-1">
-      <span class="line">You're not filling a role.</span>
-      <span class="line">You're onboarding</span>
-      <span class="line"><em>an unfair advantage.</em></span>
+      <span class="line">You're not making a hire.</span>
+      <span class="line">You're gaining</span>
+      <span class="line"><em>a compounding asset.</em></span>
     </h2>
     <p class="sub reveal reveal-delay-2">
       The page you just read is that advantage. It existed as a card on a Trello board 4 hours ago.
@@ -723,7 +1072,7 @@
       <div class="reason-item">
         <p class="reason-title">He has a low tolerance for process theatre.</p>
         <p class="reason-body">Alignment meetings, status updates, decks that exist to prove the deck exists.
-          If your culture runs on ceremonies and he can't see the point, he'll say so. Sometimes politely.</p>
+          If your culture runs on ceremonies and he can't see the point, he'll say so — directly, diplomatically, and without making it anyone's personal crisis.</p>
       </div>
 
       <div class="reason-item">
@@ -823,21 +1172,57 @@
   if (howSection) tlObs.observe(howSection);
 
   // ── Proof pills — flip cards ──────────────────────
+  function normalisePillHeights() {
+    // Reset all pills so we can measure natural heights
+    document.querySelectorAll('.pill').forEach(pill => {
+      pill.style.minHeight = '';
+      pill.querySelector('.pill-inner').style.minHeight = '';
+    });
+
+    // For each row, find the tallest pill and set all in that row to match
+    const grid = document.querySelector('.pills-grid');
+    if (!grid) return;
+    const pills = Array.from(grid.querySelectorAll('.pill'));
+
+    // Group pills by their top offset (i.e. by row)
+    const rows = {};
+    pills.forEach(pill => {
+      const top = pill.getBoundingClientRect().top + window.scrollY;
+      const key = Math.round(top / 5) * 5; // snap to 5px buckets for float rounding
+      if (!rows[key]) rows[key] = [];
+      rows[key].push(pill);
+    });
+
+    Object.values(rows).forEach(rowPills => {
+      // Measure the taller face of each pill
+      let maxH = 0;
+      rowPills.forEach(pill => {
+        const front = pill.querySelector('.pill-front');
+        const back  = pill.querySelector('.pill-back');
+        maxH = Math.max(maxH, front.scrollHeight, back.scrollHeight);
+      });
+      // Apply to every pill and its inner in the row
+      rowPills.forEach(pill => {
+        pill.style.minHeight = maxH + 'px';
+        pill.querySelector('.pill-inner').style.minHeight = maxH + 'px';
+      });
+    });
+  }
+
   document.querySelectorAll('.pill').forEach(pill => {
     function flip() {
       const flipped = pill.classList.toggle('flipped');
       pill.setAttribute('aria-expanded', flipped);
-      // Ensure the inner height matches the taller face after flip
-      const front = pill.querySelector('.pill-front');
-      const back  = pill.querySelector('.pill-back');
-      const inner = pill.querySelector('.pill-inner');
-      const h = Math.max(front.scrollHeight, back.scrollHeight);
-      inner.style.minHeight = h + 'px';
-      pill.style.minHeight  = h + 'px';
+      // After flip animation, re-normalise so rows stay even
+      setTimeout(normalisePillHeights, 600);
     }
     pill.addEventListener('click', flip);
     pill.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
   });
+
+  // Normalise on load and resize
+  window.addEventListener('load', normalisePillHeights);
+  window.addEventListener('resize', normalisePillHeights);
 
   // Ask Jarvis text bot removed — replaced by ElevenLabs convai widget
 
